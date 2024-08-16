@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isRunning, setIsRunning] = useState(false);
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    let intervalId;
+
+    if (isRunning) {
+      intervalId = setInterval(() => setTime(time + 1), 10);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning, time]);
+
+  const handleStartStop = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const minutes = Math.floor((time % 36000) / 6000);
+  const seconds = Math.floor((time % 6000) / 100);
+
+  const handleReset = () => {
+    setTime(0);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <main>
+      <h1>Stopwatch</h1>
+      <div className="layout">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Time: {minutes < 10 ? `0${minutes}` : minutes}:
+          {seconds < 10 ? `0${seconds}` : seconds}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <div className="btn">
+          <button onClick={handleStartStop}>
+            {!isRunning ? "Start" : "Stop"}
+          </button>
+          <button onClick={handleReset}>Reset</button>
+        </div>
+      </div>
+    </main>
   );
 }
 
