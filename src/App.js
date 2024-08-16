@@ -29,8 +29,7 @@ function App() {
       <h1>Stopwatch</h1>
       <div className="layout">
         <p>
-          Time: {minutes < 10 ? `0${minutes}` : minutes}:
-          {seconds < 10 ? `0${seconds}` : seconds}
+          Time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
         </p>
         <div className="btn">
           <button onClick={handleStartStop}>
