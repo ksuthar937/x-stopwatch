@@ -32,9 +32,11 @@ function App() {
           Time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
         </p>
         <div className="btn">
-          <button onClick={handleStartStop}>
-            {!isRunning ? "Start" : "Stop"}
-          </button>
+          {!isRunning ? (
+            <button onClick={handleStartStop}>Start</button>
+          ) : (
+            <button onClick={handleStartStop}>Stop</button>
+          )}
           <button onClick={handleReset}>Reset</button>
         </div>
       </div>
