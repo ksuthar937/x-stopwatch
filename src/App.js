@@ -8,7 +8,7 @@ function App() {
     let intervalId;
 
     if (isRunning) {
-      intervalId = setInterval(() => setTime(time + 1), 10);
+      intervalId = setInterval(() => setTime(time + 1), 1000);
     }
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
@@ -17,8 +17,8 @@ function App() {
     setIsRunning(!isRunning);
   };
 
-  const minutes = Math.floor((time % 36000) / 6000);
-  const seconds = Math.floor((time % 6000) / 100);
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
 
   const handleReset = () => {
     setTime(0);
