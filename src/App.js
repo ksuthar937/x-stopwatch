@@ -8,7 +8,9 @@ function App() {
     let intervalId;
 
     if (isRunning) {
-      intervalId = setInterval(() => setTime(time + 1), 1000);
+      intervalId = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
     }
     return () => clearInterval(intervalId);
   }, [isRunning, time]);
